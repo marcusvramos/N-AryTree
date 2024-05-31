@@ -7,16 +7,16 @@ public class AplicacaoNArea {
     }
 
     public void executa() {
-        arv.inserir(10);
-        arv.inserir(20);
-        arv.inserir(30);
-        arv.inserir(40);
-        arv.inserir(50);
+        for(int i = 1; i <= 25; i++) {
+            arv.inserir(i);
+        }
 
         System.out.println("Exibição em nível:");
         arv.exibirEmNivel();
-        System.out.println("\nExibição em profundidade:");
-        arv.exibirEmProfundidade();
+        System.out.println("\nInOrdem recursivo:");
+        arv.inOrdem();
+        System.out.println("\nInOrdem iterativo:");
+        arv.inOrdemIterativo();
     }
 
     public static void main(String[] args) {

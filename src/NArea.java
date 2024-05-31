@@ -44,38 +44,65 @@ public class NArea {
     public void exibirEmNivel() {
         if (raiz == null) return;
 
-        List<No> fila = new ArrayList<>();
-        fila.add(raiz);
+        Fila fila = new Fila();
+        fila.enqueue(raiz);
 
         while (!fila.isEmpty()) {
-            No no = fila.remove(0);
-            No atual = no;
+            No atual = fila.dequeue();
             while (atual != null) {
                 System.out.print(atual.getInfo() + " ");
-                if (atual.getLig() != null) {
-                    fila.add(atual.getLig());
+                No ligacao = atual.getLig();
+                while (ligacao != null) {
+                    fila.enqueue(ligacao);
+                    ligacao = ligacao.getProx();
                 }
                 atual = atual.getProxInfo();
             }
         }
+        System.out.println();
     }
 
-    public void exibirEmProfundidade() {
+    public void inOrdem() {
+        inOrdem(raiz);
+        System.out.println();
+    }
+
+    private void inOrdem(No no) {
+        if (no != null) {
+            inOrdem(no.getLig());
+            No atual = no;
+            while (atual != null) {
+                System.out.print(atual.getInfo() + " ");
+                atual = atual.getProxInfo();
+            }
+            inOrdem(no.getProx());
+        }
+    }
+
+    public void inOrdemIterativo() {
         if (raiz == null) return;
 
-        List<No> pilha = new ArrayList<>();
-        pilha.add(raiz);
+        Pilha p = new Pilha();
+        p.init();
+        No atual = raiz;
 
-        while (!pilha.isEmpty()) {
-            No no = pilha.remove(pilha.size() - 1);
-            No atual = no;
+        while (atual != null || !p.isEmpty()) {
             while (atual != null) {
-                System.out.print(atual.getInfo() + " ");
-                if (atual.getLig() != null) {
-                    pilha.add(atual.getLig());
+                p.push(atual);
+                atual = atual.getLig();
+            }
+
+            atual = p.pop();
+            if (atual != null) {
+                No temp = atual;
+                while (temp != null) {
+                    System.out.print(temp.getInfo() + " ");
+                    temp = temp.getProxInfo();
                 }
-                atual = atual.getProxInfo();
+                atual = atual.getProx();
             }
         }
+        System.out.println();
     }
+
 }
