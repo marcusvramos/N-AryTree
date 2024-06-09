@@ -1,77 +1,69 @@
-public class No {
-    private int info;
-    private No proxInfo;
-    private No lig;
-    private No prox;
-    private int tl;
+class No {
+    InfoNode info;
+    LigNode lig;
+    int tl;
+
+    public No() {
+        this.info = null;
+        this.lig = null;
+        this.tl = 0;
+    }
 
     public No(int info) {
-        this.info = info;
-        this.proxInfo = null;
-        this.lig = null;
-        this.prox = null;
-        this.tl = 1;
+        tl = 1;
+        this.lig = new LigNode();
+        this.lig.setProx(new LigNode());
+        this.info = new InfoNode(info);
     }
 
-    public int getInfo() {
-        return info;
-    }
-
-    public No getProxInfo() {
-        return proxInfo;
-    }
-
-    public void setProxInfo(No proxInfo) {
-        this.proxInfo = proxInfo;
-    }
-
-    public No getLig() {
-        return lig;
-    }
-
-    public void setLig(No lig) {
-        this.lig = lig;
-    }
-
-    public No getProx() {
-        return prox;
-    }
-
-    public void setProx(No prox) {
-        this.prox = prox;
-    }
-
-    public int getTl() {
-        return tl;
-    }
-
-    public void setTl(int tl) {
-        this.tl = tl;
-    }
-
-    public void addInfo(int info) {
-        No novo = new No(info);
-        if (this.proxInfo == null) {
-            this.proxInfo = novo;
+    // Método para adicionar uma informação no nó
+    public void addInfo(int pos, InfoNode info) {
+        LigNode novo = new LigNode();
+        if (pos == 0) {
+            info.setProx(this.info);
+            this.info = info;
+            novo.setProx(this.lig);
+            this.lig = novo;
         } else {
-            No atual = this.proxInfo;
-            while (atual.getProxInfo() != null) {
-                atual = atual.getProxInfo();
+            InfoNode aux = this.info;
+            LigNode auxLig = this.lig;
+            for (int i = 0; i < pos-1; i++) {
+                aux = aux.getProx();
+                auxLig = auxLig.getProx();
             }
-            atual.setProxInfo(novo);
+            novo.setProx(auxLig.getProx());
+            auxLig.setProx(novo);
+            info.setProx(aux.getProx());
+            aux.setProx(info);
         }
-        this.tl++;
+        tl++;
     }
 
-    public void addLig(No no) {
-        if (this.lig == null) {
-            this.lig = no;
-        } else {
-            No atual = this.lig;
-            while (atual.getProx() != null) {
-                atual = atual.getProx();
-            }
-            atual.setProx(no);
+    // Método para adicionar uma ligação no nó
+    public void inserirLig(int pos, No no){
+        LigNode aux = this.lig;
+        for(int i = 0; i < pos; i++){
+            aux = aux.getProx();
         }
+        aux.setFilho(no);
+    }
+
+    // Método para buscar a posição de inserção
+    public int buscarPos(int info) {
+        InfoNode atual = this.info;
+        int pos = 0;
+        while (atual != null && atual.getInfo() < info) {
+            atual = atual.getProx();
+            pos++;
+        }
+        return pos;
+    }
+
+    public LigNode getLig(int pos) {
+        LigNode aux = this.lig;
+        for (int i = 0; i < pos; i++) {
+            aux = aux.getProx();
+        }
+        return aux;
     }
 }

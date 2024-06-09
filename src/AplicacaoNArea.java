@@ -1,26 +1,15 @@
-
 public class AplicacaoNArea {
-    private NArea arv;
-
-    public AplicacaoNArea() {
-        arv = new NArea();
-    }
-
-    public void executa() {
-        for(int i = 1; i <= 25; i++) {
-            arv.inserir(i);
-        }
+    public static void main(String[] args) {
+        NArea nArea = new NArea();
+        nArea.inserir(30);
+        nArea.inserir(40);
+        nArea.inserir(10);
+        nArea.inserir(20);
+        nArea.inserir(35);
+        nArea.inserir(38);
+        nArea.inserir(45);
 
         System.out.println("Exibição em nível:");
-        arv.exibirEmNivel();
-        System.out.println("\nInOrdem recursivo:");
-        arv.inOrdem();
-        System.out.println("\nInOrdem iterativo:");
-        arv.inOrdemIterativo();
-    }
-
-    public static void main(String[] args) {
-        AplicacaoNArea app = new AplicacaoNArea();
-        app.executa();
+        nArea.exibirEmNivel();
     }
 }

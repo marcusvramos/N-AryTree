@@ -5,12 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b0cd1385-aeca-4dd8-a1fc-3d08095781f9" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/Fila.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/NoFila.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Pilha.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/AplicacaoNArea.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/AplicacaoNArea.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/NArea.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/NArea.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/No.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/No.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -39,6 +37,7 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "Application.AplicacaoNArea.executor": "Run",
+    "Application.Main.executor": "Run",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "master",
@@ -93,5 +92,16 @@
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/AplicacaoNArea.java</url>
+          <line>11</line>
+          <option name="timeStamp" value="7" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

@@ -1,46 +1,36 @@
-import java.util.ArrayList;
-import java.util.List;
-
 public class NArea {
     private No raiz;
 
     public NArea() {
-        this.raiz = null;
+        raiz = null;
     }
 
+    // Método para inserir um elemento na árvore
     public void inserir(int info) {
         if (raiz == null) {
             raiz = new No(info);
-            return;
-        }
+        } else {
+            No folha = navegarAteFolha(info);
 
-        No aux = raiz;
-        boolean inseriu = false;
-
-        while (!inseriu) {
-            if (aux.getTl() < 3) {
-                aux.addInfo(info);
-                inseriu = true;
-            } else {
-                No ligacao = aux.getLig();
-                boolean encontrou = false;
-                while (ligacao != null && !encontrou) {
-                    if (ligacao.getTl() < 3) {
-                        aux = ligacao;
-                        encontrou = true;
-                    } else {
-                        ligacao = ligacao.getProx();
-                    }
-                }
-                if (!encontrou) {
-                    No novoNo = new No(info);
-                    aux.addLig(novoNo);
-                    inseriu = true;
-                }
+            if (folha.tl < 3-1) { // N = 3
+                folha.addInfo(folha.buscarPos(info), new InfoNode(info));
+            }  else{
+                folha.inserirLig(folha.buscarPos(info), new No(info));
             }
         }
     }
 
+    private No navegarAteFolha(int info){
+        No aux = raiz;
+        int pos = aux.buscarPos(info);
+        while (aux.getLig(pos).getFilho() != null){
+            aux = aux.getLig(pos).getFilho();
+            pos = aux.buscarPos(info);
+        }
+        return aux;
+    }
+
+    // Método para exibir todos os elementos em nível
     public void exibirEmNivel() {
         if (raiz == null) return;
 
@@ -49,60 +39,22 @@ public class NArea {
 
         while (!fila.isEmpty()) {
             No atual = fila.dequeue();
-            while (atual != null) {
-                System.out.print(atual.getInfo() + " ");
-                No ligacao = atual.getLig();
-                while (ligacao != null) {
-                    fila.enqueue(ligacao);
-                    ligacao = ligacao.getProx();
+            if (atual == null) continue; // Verificação adicional
+
+            InfoNode infoAtual = atual.info;
+            while (infoAtual != null) {
+                System.out.print(infoAtual.getInfo() + " ");
+                infoAtual = infoAtual.getProx();
+            }
+
+            LigNode ligAtual = atual.lig;
+            while (ligAtual != null) {
+                if (ligAtual.getFilho() != null) {
+                    fila.enqueue(ligAtual.getFilho());
                 }
-                atual = atual.getProxInfo();
+                ligAtual = ligAtual.getProx();
             }
         }
         System.out.println();
     }
-
-    public void inOrdem() {
-        inOrdem(raiz);
-        System.out.println();
-    }
-
-    private void inOrdem(No no) {
-        if (no != null) {
-            inOrdem(no.getLig());
-            No atual = no;
-            while (atual != null) {
-                System.out.print(atual.getInfo() + " ");
-                atual = atual.getProxInfo();
-            }
-            inOrdem(no.getProx());
-        }
-    }
-
-    public void inOrdemIterativo() {
-        if (raiz == null) return;
-
-        Pilha p = new Pilha();
-        p.init();
-        No atual = raiz;
-
-        while (atual != null || !p.isEmpty()) {
-            while (atual != null) {
-                p.push(atual);
-                atual = atual.getLig();
-            }
-
-            atual = p.pop();
-            if (atual != null) {
-                No temp = atual;
-                while (temp != null) {
-                    System.out.print(temp.getInfo() + " ");
-                    temp = temp.getProxInfo();
-                }
-                atual = atual.getProx();
-            }
-        }
-        System.out.println();
-    }
-
 }
